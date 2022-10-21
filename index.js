@@ -19,9 +19,16 @@ inquirer
       message: 'Write a short description for your project.',
     },
     {
-      type: 'input',
+      type: 'checkbox',
       name: 'table',
       message: 'What to include in table of contents?',
+      choices : [
+        'installation',
+        'usage',
+        'contribute',
+        'tests',
+        'questions'
+      ]
     },
     {
       type: 'input',
@@ -31,30 +38,41 @@ inquirer
     {
       type: 'input',
       name: 'usage',
-      message: 'Usage instructions:',
+      message: 'Usage information:',
     },
     {
-      type: 'input',
+      type: 'list',
       name: 'license',
       message: 'What sort of license would you like?',
+      choices : [
+        "MIT",
+        "GNUv3.0",
+        "Apache2.0"
+      ]
     },
     {
         type: 'input',
-        name: 'contributing',
-        message: 'How to contribute to this project?',
+        name: 'contribute',
+        message: 'Contribution guidelines:',
       },
       {
         type: 'input',
         name: 'tests',
-        message: 'How to test your application?',
+        message: 'Test instructions:',
       },
       {
         type: 'input',
-        name: 'questions',
-        message: 'Any questions to include?',
+        name: 'github',
+        message: 'GitHub username:',
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'Email:',
       },
   ])
   .then((answers) => {
+    console.log(answers.table);
     const newReadme = generateMarkdown(answers);
     fs.writeFile('generated-README.md', newReadme, (err) =>
     err ? console.log(err) : console.log('Congrats! You created a README for your project!'));
